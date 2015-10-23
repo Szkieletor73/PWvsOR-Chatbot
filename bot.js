@@ -90,15 +90,22 @@ bot.on("message", function(message){
 			}
 			
 			//troop types!
-			
 			if(command === "\\troops" || command === "\\trooptypes"){
 				bot.sendMessage(message.author, "OPPOSE: Cavalry beats Infantry, Infantry beats Ranged, Ranged beats Cavalry\nSUPPORT: Cavalry for Ranged, Ranged for Infantry, Infantry for Cavalry");
 			}
 		// } //anti lolz ends here hopefully we never have to deploy it again
 } )
 
+//fired when new person enters the server
 bot.on("serverNewMember", function(user){
 	bot.sendMessage(user, "Welcome to Periwinkle vs Orangered Discord Chat! I'm a resident bot. Send me \"\\help\" to get a list of commands.\nIf you have any questions, ask a moderator!");
+})
+
+//fired on logout/login
+bot.on("presence", function(dataObject){
+	//if(dataObject.status === "online"){
+		bot.sendMessage(dataObject.server.defaultChannel, dataObject.user + " has had a presence update: " + dataObject.status);
+	//}
 })
 
 bot.login("szkieletorpp@gmail.com", "169806");
