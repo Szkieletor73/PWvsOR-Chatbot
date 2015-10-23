@@ -1,0 +1,21 @@
+{
+  "name": "discordbot",
+  "version": "0.1.2",
+  "description": "Periwinkle vs Orangered Discord chatbot",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^3.8.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "keywords": [
+    "discord",
+    "chatbot",
+    "periwinkle",
+    "orangered"
+  ],
+  "author": "Szkieletor",
+  "license": "ISC"
+}
