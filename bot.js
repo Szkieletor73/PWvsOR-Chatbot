@@ -103,9 +103,12 @@ bot.on("serverNewMember", function(user){
 
 //fired on logout/login
 bot.on("presence", function(dataObject){
-	//if(dataObject.status === "online"){
-		bot.sendMessage(dataObject.server.defaultChannel, dataObject.user + " has had a presence update: " + dataObject.status);
-	//}
+	if(dataObject.status === "online"){
+		bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " is now online.*");
+	}
+	if(dataObject.status === "offline"){
+		bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " went offline.*");
+	}
 })
 
 bot.login("szkieletorpp@gmail.com", "169806");
