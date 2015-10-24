@@ -33,14 +33,13 @@ bot.on("message", function(message){
 			}
 			
 			//version info
-			if(command === "\\version" || command === "\\author" || command === "\\creator" || command === "\\info"){
-				var version = "0.1.2";
-				bot.sendMessage(message.author, "Current version: " + version + ". Bot creator: /u/szkieletor on reddit. Contact my creator if you've encountered any problems!");
+			if(command === "\\author" || command === "\\creator" || command === "\\info"){
+				bot.sendMessage(message.author, "Bot based on discord.js. Bot creator: /u/szkieletor on reddit. Contact my creator if you've encountered any problems!");
 			}
 
 			//help
 			if(command === "\\help"){
-				bot.sendMessage(message.author, "All commands work in PMs and in channels:\n\\roll XdY - roll X Y-sided dice\n\\chromamap (alias: \\map) - get a link to interactive map\n\\info (aliases: \\creator, \\author, \\version) - get contact details of my creator, as well as my version.\n\\troops (alias: \\trooptypes) - get basic troop type flowchart\nMore to come.");
+				bot.sendMessage(message.author, "All commands work in PMs and in channels:\n\\roll XdY - roll X Y-sided dice\n\\chromamap (alias: \\map) - get a link to interactive map\n\\info (aliases: \\creator, \\author) - get contact details of my creator.\n\\troops (alias: \\trooptypes) - get basic troop type flowchart\n\\chromabot (aliases: \\chromabotcommands, \\battlecommands, \\chromacommands) - gives you a list of chromabot commands as well as a direct link to chromabot's /user/page.\n\\links - gives you a list of useful chroma-related links.\nMore to come.");
 			}
 			
 			//simple testing message
@@ -93,6 +92,22 @@ bot.on("message", function(message){
 			if(command === "\\troops" || command === "\\trooptypes"){
 				bot.sendMessage(message.author, "OPPOSE: Cavalry beats Infantry, Infantry beats Ranged, Ranged beats Cavalry\nSUPPORT: Cavalry for Ranged, Ranged for Infantry, Infantry for Cavalry");
 			}
+			
+			//don't even ask why I did this
+			if(command === "\\maggie" || command === "\\thatcher" || command === "\\margaret"){
+				bot.sendMessage(message.channel, "INSTANT MAGGIE PROTOCOL ACTIVATED.\nDEPLOYING MAGGIE: http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2013/4/8/1365424769833/Margaret-Thatcher-007.jpg");
+			}
+			
+			//chromabot commands
+			if(command === "\\chromabot" || command === "\\chromabotcommands" || command === "\\chromacommands"){
+				bot.sendMessage(message.author, "Full documentation: https://www.reddit.com/r/councilofkarma/wiki/bot_commands\nChromabot's userpage: https://www.reddit.com/user/chromabot\nstatus - gives you a status on your troops\ntime - bot will reply with the time it think it is\nlead - lead your troops\nextract - emergency unstuck command, moves your troops to your capital\nattack / support / oppose - battle commands\ndefect - change your team. Usable only if you haven't taken *any other action* yet.\ncodeword - set up a codeword for your troops, in format \"codeword some word or phrase is troopType\". Supports reddit markdown formatting.\ncodeword status - replies with your set codewords");
+			}
+			
+			//links
+			if(command === "\\links"){
+				bot.sendMessage(message.author, "Chromabot's userpage: https://www.reddit.com/user/chromabot\nCouncil of Karma: https://www.reddit.com/r/councilofkarma\nPeriwinkle: https://www.reddit.com/r/periwinkle\nOrangered: https://www.reddit.com/r/orangered\nChromanauts: https://www.reddit.com/r/chromanauts\nField of Karmic Glory: https://www.reddit.com/r/FieldOfKarmicGlory\nChromalore: https://www.reddit.com/r/Chromalore\nInteractive map: http://periwinklevsorangered.com/map/index.php");
+			}
+			
 		// } //anti lolz ends here hopefully we never have to deploy it again
 } )
 
@@ -102,13 +117,14 @@ bot.on("serverNewMember", function(user, server){
 })
 
 //fired on logout/login
-bot.on("presence", function(dataObject){
-	if(dataObject.status === "online"){
-		bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " is now online.*");
-	}
-	if(dataObject.status === "offline"){
-		bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " went offline.*");
-	}
-})
+// bot.on("presence", function(dataObject){
+	// if(dataObject.status === "online"){
+		// bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " is now online.*");
+	// }
+	// if(dataObject.status === "offline"){
+		// bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " went offline.*");
+	// }
+// })
+//TEMPORARILY DISABLED, we'll see if it will stay that way
 
 bot.login("szkieletorpp@gmail.com", "169806");
