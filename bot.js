@@ -97,8 +97,8 @@ bot.on("message", function(message){
 } )
 
 //fired when new person enters the server
-bot.on("serverNewMember", function(user){
-	bot.sendMessage(user, "Welcome to Periwinkle vs Orangered Discord Chat! I'm a resident bot. Send me \"\\help\" to get a list of commands.\nIf you have any questions, ask a moderator!");
+bot.on("serverNewMember", function(user, server){
+	bot.sendMessage(server.defaultChannel, "Welcome to Periwinkle vs Orangered Discord Chat! I'm a resident bot. Type \"\\help\" to get a list of available commands.\nIf you have any questions, ask a moderator!");
 })
 
 //fired on logout/login
