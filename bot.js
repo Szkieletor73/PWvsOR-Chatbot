@@ -134,7 +134,8 @@ bot.on("message", function(message){
 			
 			//bazza
 			if(command === "\\bazza"){
-				bot.sendMessage(message.channel, "http://periwinkleinnovations.com/publicchat/img/emoticons/monkey.png");
+				bot.sendFile(message.channel, "./bazza.png", "bazza.png");
+				//bot.sendMessage(message.channel, "http://periwinkleinnovations.com/publicchat/img/emoticons/monkey.png");
 			}
 			
 		// } //anti lolz ends here hopefully we never have to deploy it again
