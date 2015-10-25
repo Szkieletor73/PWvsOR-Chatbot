@@ -19,6 +19,9 @@ var bot = new Discord.Client();
 //Initialize MAGGIE table
 var maggies = ["http://www.hellomagazine.com/imagenes/profiles/margaret-thatcher/6043-margaret-thatcher.jpg","http://www.abc.net.au/news/image/3980674-3x4-700x933.jpg","http://i.telegraph.co.uk/multimedia/archive/02530/Thatcher2_2530641b.jpg","http://www.barbarapijan.com/bpa/Politics/ThatcherMargaret198x.jpg"];
 
+//Initialize facepalm table
+var facepalm = ["https://teacherorwildlifetrainer.files.wordpress.com/2015/08/double_facepalm.png","https://i.imgur.com/iWKad22.jpg","https://upload.wikimedia.org/wikipedia/commons/3/3b/Paris_Tuileries_Garden_Facepalm_statue.jpg","https://pbs.twimg.com/profile_images/1596470229/facepalm1.jpg"];
+
 //Called on message, basically chat commands
 bot.on("message", function(message){
 		//anti lolz
@@ -99,8 +102,8 @@ bot.on("message", function(message){
 			
 			//don't even ask why I did this
 			if(command === "\\maggie" || command === "\\thatcher" || command === "\\margaret"){
-				var maggie = maggies[Math.floor(Math.random()*maggies.length)];
-				bot.sendMessage(message.channel, "INSTANT MAGGIE PROTOCOL ACTIVATED.\nDEPLOYING MAGGIE: " + maggie);
+				var rng = Math.floor(Math.random()*maggies.length);
+				bot.sendMessage(message.channel, "INSTANT MAGGIE PROTOCOL ACTIVATED.\nDEPLOYING MAGGIE: " + maggies[rng]);
 			}
 			
 			//chromabot commands
@@ -116,6 +119,16 @@ bot.on("message", function(message){
 			//rules
 			if(command === "\\rules"){
 				bot.sendMessage(message.author, "Chat rules: https://docs.google.com/document/d/1j7I3VLkRWft0oBvhuQGUx0rMu7PXmfTS8k1uPXdallI/edit");
+			}
+			
+			//facepalm
+			if(command === "\\facepalm"){
+				var rng = Math.floor(Math.random()*facepalm.length);
+				if(commandsArr.length == 1){
+					bot.sendMessage(message.channel, ""+facepalm[rng]+"");
+				}else{
+					bot.sendMessage(message.channel, "Damnit, " + commandsArr[1] + "!\n" + facepalm[rng]);
+				}
 			}
 			
 		// } //anti lolz ends here hopefully we never have to deploy it again
