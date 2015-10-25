@@ -30,12 +30,12 @@ bot.on("message", function(message){
 			var commandsArr = message.content.split(' ');
 			var command = commandsArr[0];
 			
-			//anti lolz
-			if(message.author.username === "Lolzrfunni"){
-				if(command === "eejitry" || command === "eejitry."){
-					bot.reply(message, "fackorff");
-				}
-			}
+			// anti lolz
+			// if(message.author.username === "Lolzrfunni"){
+				// if(command === "eejitry" || command === "eejitry."){
+					// bot.reply(message, "fackorff");
+				// }
+			// }
 			//version info
 			if(command === "\\author" || command === "\\creator" || command === "\\info"){
 				bot.sendMessage(message.author, "Bot based on discord.js. Bot creator: /u/szkieletor on reddit.\nSource on GitHub: https://github.com/Szkieletor73/PWvsOR-Chatbot\nContact my creator if you've encountered any problems!");
