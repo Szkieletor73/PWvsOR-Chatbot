@@ -16,6 +16,9 @@ app.get('/', function(request, response) {
 var Discord = require("discord.js");
 var bot = new Discord.Client();
 
+//Initialize MAGGIE table
+var maggies = ["http://www.hellomagazine.com/imagenes/profiles/margaret-thatcher/6043-margaret-thatcher.jpg","http://www.abc.net.au/news/image/3980674-3x4-700x933.jpg","http://i.telegraph.co.uk/multimedia/archive/02530/Thatcher2_2530641b.jpg","http://www.barbarapijan.com/bpa/Politics/ThatcherMargaret198x.jpg"];
+
 //Called on message, basically chat commands
 bot.on("message", function(message){
 		//anti lolz
@@ -28,10 +31,14 @@ bot.on("message", function(message){
 			var command = commandsArr[0];
 			
 			//anti lolz
-			if(command === "eejitry" && message.author.username === "Lolzrfunni"){
-				bot.reply(message, "fackorff");
+			if(message.author.username === "Lolzrfunni"){
+				for(var i = commandsArr.length(), i > 0, i--) {
+					if(commandsArr[i] === "eejitry" || commandsArr[i] === "eejitry."){
+						bot.reply(message, "fackorff");
+						i = 0;
+					}
+				}
 			}
-			
 			//version info
 			if(command === "\\author" || command === "\\creator" || command === "\\info"){
 				bot.sendMessage(message.author, "Bot based on discord.js. Bot creator: /u/szkieletor on reddit. Contact my creator if you've encountered any problems!");
@@ -95,7 +102,8 @@ bot.on("message", function(message){
 			
 			//don't even ask why I did this
 			if(command === "\\maggie" || command === "\\thatcher" || command === "\\margaret"){
-				bot.sendMessage(message.channel, "INSTANT MAGGIE PROTOCOL ACTIVATED.\nDEPLOYING MAGGIE: http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2013/4/8/1365424769833/Margaret-Thatcher-007.jpg");
+				var maggie = maggies[Math.floor(Math.random()*maggies.length)];
+				bot.sendMessage(message.channel, "INSTANT MAGGIE PROTOCOL ACTIVATED.\nDEPLOYING MAGGIE: " + maggie);
 			}
 			
 			//chromabot commands
