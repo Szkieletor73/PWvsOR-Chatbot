@@ -138,6 +138,31 @@ bot.on("message", function(message){
 				//bot.sendMessage(message.channel, "http://periwinkleinnovations.com/publicchat/img/emoticons/monkey.png");
 			}
 			
+			//biblethump
+			if(command === "\\biblethump"){
+				bot.sendFile(message.channel, "./biblethump.png", "biblethump.png");
+			}
+			
+			//kappa
+			if(command === "\\kappa"){
+				bot.sendFile(message.channel, "./kappa.png", "kappa.png");
+			}
+			
+			//frankerz
+			if(command === "\\frankerz"){
+				bot.sendFile(message.channel, "./frankerz.png", "frankerz.png");
+			}
+			
+			//kreygasm
+			if(command === "\\kreygasm"){
+				bot.sendFile(message.channel, "./kreygasm.png", "kreygasm.png");
+			}
+			
+			//failfish
+			if(command === "\\failfish"){
+				bot.sendFile(message.channel, "./failfish.png", "failfish.png");
+			}
+			
 		// } //anti lolz ends here hopefully we never have to deploy it again
 } )
 
