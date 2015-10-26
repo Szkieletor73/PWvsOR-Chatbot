@@ -134,33 +134,44 @@ bot.on("message", function(message){
 			
 			//bazza
 			if(command === "\\bazza"){
+				bot.deleteMessage(message);
 				bot.sendFile(message.channel, "./bazza.png", "bazza.png");
-				//bot.sendMessage(message.channel, "http://periwinkleinnovations.com/publicchat/img/emoticons/monkey.png");
 			}
 			
 			//biblethump
 			if(command === "\\biblethump"){
+				bot.deleteMessage(message);
 				bot.sendFile(message.channel, "./biblethump.png", "biblethump.png");
 			}
 			
 			//kappa
 			if(command === "\\kappa"){
+				bot.deleteMessage(message);
 				bot.sendFile(message.channel, "./kappa.png", "kappa.png");
 			}
 			
 			//frankerz
 			if(command === "\\frankerz"){
+				bot.deleteMessage(message);
 				bot.sendFile(message.channel, "./frankerz.png", "frankerz.png");
 			}
 			
 			//kreygasm
 			if(command === "\\kreygasm"){
+				bot.deleteMessage(message);
 				bot.sendFile(message.channel, "./kreygasm.png", "kreygasm.png");
 			}
 			
 			//failfish
 			if(command === "\\failfish"){
+				bot.deleteMessage(message);
 				bot.sendFile(message.channel, "./failfish.png", "failfish.png");
+			}
+			
+			//^this
+			if(command === "\\this" || command === "\\^"){
+				bot.deleteMessage(message);
+				bot.sendFile(message.channel, "./uparrow.png", "uparrow.png");
 			}
 			
 		// } //anti lolz ends here hopefully we never have to deploy it again
