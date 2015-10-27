@@ -174,6 +174,12 @@ bot.on("message", function(message){
 				bot.sendFile(message.channel, "./uparrow.png", "uparrow.png");
 			}
 			
+			//hyper
+			if(command === "\\hyper"){
+				bot.deleteMessage(message);
+				bot.sendFile(message.channel, "./hyper.gif", "hyper.gif");
+			}
+			
 		// } //anti lolz ends here hopefully we never have to deploy it again
 } )
 
