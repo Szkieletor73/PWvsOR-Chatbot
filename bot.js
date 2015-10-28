@@ -27,6 +27,9 @@ var facepalm = ["https://teacherorwildlifetrainer.files.wordpress.com/2015/08/do
 //Initialize away array
 var away = [];
 
+//Initialize statusmessages
+var statusmessages = false;
+
 //Called on message, basically chat commands
 bot.on("message", function(message){
 		//anti lolz
@@ -185,6 +188,15 @@ bot.on("message", function(message){
 				bot.sendFile(message.channel, "./hyper.gif", "hyper.gif");
 			}
 			
+			//login/logout toggler
+			if(command === "\\statusmessages"){
+				if(statusmessages === true){
+					statusmessage = false;
+				}else{
+					statusmessage = true;
+				}
+			}
+			
 		// } //anti lolz ends here hopefully we never have to deploy it again
 } )
 
@@ -195,38 +207,40 @@ bot.on("serverNewMember", function(user, server){
 
 //fired on logout/login
 bot.on("presence", function(dataObject){
-	/*
-	if(dataObject.status === "away"){
-		//add to away array when user goes afk
-		away.push(dataObject.user.username);
-	}
-	
-	if(dataObject.status === "online"){
-		//check if exists in away array
-		if(away.indexOf(dataObject.user.username) == -1){
+	if(statumessages === true){
+		/*
+		if(dataObject.status === "away"){
+			//add to away array when user goes afk
+			away.push(dataObject.user.username);
+		}
+		
+		if(dataObject.status === "online"){
+			//check if exists in away array
+			if(away.indexOf(dataObject.user.username) == -1){
+				//username doesn't exist in away array, send message
+				away.push(dataObject.user.username); // add username to away array if already online, so it doesn't get called when in-game status changes
+				bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " is now online.*");
+			}else{
+				//username exists in away array, don't send message, remove from array
+				away.splice(away.indexOf(dataObject.user.username),1);
+			}
+		}
+		*/
+		
+		if(dataObject.status === "online" && away.indexOf(dataObject.user.username) == -1){
 			//username doesn't exist in away array, send message
 			away.push(dataObject.user.username); // add username to away array if already online, so it doesn't get called when in-game status changes
 			bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " is now online.*");
-		}else{
-			//username exists in away array, don't send message, remove from array
-			away.splice(away.indexOf(dataObject.user.username),1);
 		}
-	}
-	*/
-	
-	if(dataObject.status === "online" && away.indexOf(dataObject.user.username) == -1){
-		//username doesn't exist in away array, send message
-		away.push(dataObject.user.username); // add username to away array if already online, so it doesn't get called when in-game status changes
-		bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " is now online.*");
-	}
-	
-	if(dataObject.status === "offline"){
-		bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " went offline.*");
-		//if exists in away array, remove to clear up
-		if(away.indexOf(dataObject.user.username) != -1){
-			away.splice(away.indexOf(dataObject.user.username),1);
+		
+		if(dataObject.status === "offline"){
+			// bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " went offline.*");
+			//if exists in away array, remove to clear up
+			if(away.indexOf(dataObject.user.username) != -1){
+				away.splice(away.indexOf(dataObject.user.username),1);
+			}
 		}
-	}
+	}else{}
 })
 
 bot.login("szkieletorpp@gmail.com", "169806");
