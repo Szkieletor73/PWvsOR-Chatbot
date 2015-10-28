@@ -191,9 +191,9 @@ bot.on("message", function(message){
 			//login/logout toggler
 			if(command === "\\statusmessages"){
 				if(statusmessages === true){
-					statusmessage = false;
+					statusmessages = false;
 				}else{
-					statusmessage = true;
+					statusmessages = true;
 				}
 			}
 			
@@ -207,7 +207,7 @@ bot.on("serverNewMember", function(user, server){
 
 //fired on logout/login
 bot.on("presence", function(dataObject){
-	if(statumessages === true){
+	if(statusmessages === true){
 		/*
 		if(dataObject.status === "away"){
 			//add to away array when user goes afk
