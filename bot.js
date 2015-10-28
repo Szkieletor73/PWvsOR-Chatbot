@@ -195,10 +195,12 @@ bot.on("serverNewMember", function(user, server){
 
 //fired on logout/login
 bot.on("presence", function(dataObject){
+	/*
 	if(dataObject.status === "away"){
 		//add to away array when user goes afk
 		away.push(dataObject.user.username);
 	}
+	
 	if(dataObject.status === "online"){
 		//check if exists in away array
 		if(away.indexOf(dataObject.user.username) == -1){
@@ -210,6 +212,14 @@ bot.on("presence", function(dataObject){
 			away.splice(away.indexOf(dataObject.user.username),1);
 		}
 	}
+	*/
+	
+	if(dataObject.status === "online" && away.indexOf(dataObject.user.username) == -1){
+		//username doesn't exist in away array, send message
+		away.push(dataObject.user.username); // add username to away array if already online, so it doesn't get called when in-game status changes
+		bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " is now online.*");
+	}
+	
 	if(dataObject.status === "offline"){
 		bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " went offline.*");
 		//if exists in away array, remove to clear up
