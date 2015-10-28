@@ -203,6 +203,7 @@ bot.on("presence", function(dataObject){
 		//check if exists in away array
 		if(away.indexOf(dataObject.user.username) == -1){
 			//username doesn't exist in away array, send message
+			away.push(dataObject.user.username); // add username to away array if already online, so it doesn't get called when in-game status changes
 			bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " is now online.*");
 		}else{
 			//username exists in away array, don't send message, remove from array
