@@ -13,14 +13,19 @@ app.get('/', function(request, response) {
 });
 // END OF EXPRESS BLOCK
 
-var Discord = require("discord.js");
+
+// var underscore = require('underscore'); //load underscore.js node module
+var Discord = require("discord.js"); //load discord.js node module
 var bot = new Discord.Client();
 
-//Initialize MAGGIE table
+//Initialize MAGGIE array
 var maggies = ["http://www.hellomagazine.com/imagenes/profiles/margaret-thatcher/6043-margaret-thatcher.jpg","http://www.abc.net.au/news/image/3980674-3x4-700x933.jpg","http://i.telegraph.co.uk/multimedia/archive/02530/Thatcher2_2530641b.jpg","http://www.barbarapijan.com/bpa/Politics/ThatcherMargaret198x.jpg"];
 
-//Initialize facepalm table
+//Initialize facepalm array
 var facepalm = ["https://teacherorwildlifetrainer.files.wordpress.com/2015/08/double_facepalm.png","https://i.imgur.com/iWKad22.jpg","https://upload.wikimedia.org/wikipedia/commons/3/3b/Paris_Tuileries_Garden_Facepalm_statue.jpg","https://pbs.twimg.com/profile_images/1596470229/facepalm1.jpg"];
+
+//Initialize away array
+var away = [];
 
 //Called on message, basically chat commands
 bot.on("message", function(message){
@@ -185,18 +190,32 @@ bot.on("message", function(message){
 
 //fired when new person enters the server
 bot.on("serverNewMember", function(user, server){
-	bot.sendMessage(server.defaultChannel, "Welcome to Periwinkle vs Orangered Discord Chat! I'm a resident bot. Type \"\\help\" to get a list of available commands. Type \"\\rules\" to get current chat rules!\nIf you have any questions, ask a moderator!");
+	bot.sendMessage(user, "Welcome to Periwinkle vs Orangered Discord Chat! I'm a resident bot. Type \"\\help\" to get a list of available commands. Type \"\\rules\" to get current chat rules.\nType \"\\info\" to get my creator's contact details and a link to GitHub repo with my code.\nIf you have any questions, ask a moderator!");
 })
 
 //fired on logout/login
-// bot.on("presence", function(dataObject){
-	// if(dataObject.status === "online"){
-		// bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " is now online.*");
-	// }
-	// if(dataObject.status === "offline"){
-		// bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " went offline.*");
-	// }
-// })
-//TEMPORARILY DISABLED, we'll see if it will stay that way
+bot.on("presence", function(dataObject){
+	if(dataObject.status === "away"){
+		//add to away array when user goes afk
+		away.push(dataObject.user.username);
+	}
+	if(dataObject.status === "online"){
+		//check if exists in away array
+		if(away.indexOf(dataObject.user.username) == -1){
+			//username doesn't exist in away array, send message
+			bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " is now online.*");
+		}else{
+			//username exists in away array, don't send message, remove from array
+			away.splice(away.indexOf(dataObject.user.username),1);
+		}
+	}
+	if(dataObject.status === "offline"){
+		bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " went offline.*");
+		//if exists in away array, remove to clear up
+		if(away.indexOf(dataObject.user.username) != -1){
+			away.splice(away.indexOf(dataObject.user.username),1);
+		}
+	}
+})
 
 bot.login("szkieletorpp@gmail.com", "169806");
