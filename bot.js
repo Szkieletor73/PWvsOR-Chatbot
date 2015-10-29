@@ -14,14 +14,14 @@ app.get('/', function(request, response) {
 // END OF EXPRESS BLOCK
 
 
-// var underscore = require('underscore'); //load underscore.js node module
 var Discord = require("discord.js"); //load discord.js node module
 var bot = new Discord.Client();
 
-//Initialize MAGGIE array
+//Initialize MAGGIE
 var maggies = ["http://www.hellomagazine.com/imagenes/profiles/margaret-thatcher/6043-margaret-thatcher.jpg","http://www.abc.net.au/news/image/3980674-3x4-700x933.jpg","http://i.telegraph.co.uk/multimedia/archive/02530/Thatcher2_2530641b.jpg","http://www.barbarapijan.com/bpa/Politics/ThatcherMargaret198x.jpg"];
+var stringMaggie = "INSTANT MAGGIE PROTOCOL ACTIVATED.\nDEPLOYING MAGGIE: ";
 
-//Initialize facepalm array
+//Initialize facepalm
 var facepalm = ["https://teacherorwildlifetrainer.files.wordpress.com/2015/08/double_facepalm.png","https://i.imgur.com/iWKad22.jpg","https://upload.wikimedia.org/wikipedia/commons/3/3b/Paris_Tuileries_Garden_Facepalm_statue.jpg","https://pbs.twimg.com/profile_images/1596470229/facepalm1.jpg"];
 
 //Initialize away array
@@ -33,188 +33,146 @@ var statusmessages = false;
 //Initialization of message strings
 var stringInfo = "Bot based on discord.js. Bot creator: /u/szkieletor on reddit.\nSource on GitHub: https://github.com/Szkieletor73/PWvsOR-Chatbot\nContact my creator if you've encountered any problems, and/or make a pull request if you can fix them!";
 var stringHelp = "All commands work in PMs and in channels:\n\\roll XdY - roll X Y-sided dice\n\\chromamap (alias: \\map) - get a link to interactive map\n\\info (aliases: \\creator, \\author) - get contact details of my creator.\n\\troops (alias: \\trooptypes) - get basic troop type flowchart\n\\chromabot (aliases: \\chromabotcommands, \\battlecommands, \\chromacommands) - gives you a list of chromabot commands as well as a direct link to chromabot's /user/page.\n\\links - gives you a list of useful chroma-related links.\n\\rules - gives you chat rules. They're also linked in \\links\nMore to come.";
+var stringMap = "http://periwinklevsorangered.com/map/index.php";
+var stringTroops = "OPPOSE: Cavalry beats Infantry, Infantry beats Ranged, Ranged beats Cavalry\nSUPPORT: Cavalry for Ranged, Ranged for Infantry, Infantry for Cavalry";
+var stringCommands = "Full documentation: https://www.reddit.com/r/councilofkarma/wiki/bot_commands\nChromabot's userpage: https://www.reddit.com/user/chromabot\nstatus - gives you a status on your troops\ntime - bot will reply with the time it think it is\nlead - lead your troops\nextract - emergency unstuck command, moves your troops to your capital\nattack / support / oppose - battle commands\ndefect - change your team. Usable only if you haven't taken *any other action* yet.\ncodeword - set up a codeword for your troops, in format \"codeword some word or phrase is troopType\". Supports reddit markdown formatting.\ncodeword status - replies with your set codewords";
+var stringLinks = "Chat rules: https://docs.google.com/document/d/1j7I3VLkRWft0oBvhuQGUx0rMu7PXmfTS8k1uPXdallI/edit\nChromabot's userpage: https://www.reddit.com/user/chromabot\nCouncil of Karma: https://www.reddit.com/r/councilofkarma\nPeriwinkle: https://www.reddit.com/r/periwinkle\nOrangered: https://www.reddit.com/r/orangered\nChromanauts: https://www.reddit.com/r/chromanauts\nField of Karmic Glory: https://www.reddit.com/r/FieldOfKarmicGlory\nChromalore: https://www.reddit.com/r/Chromalore\nInteractive map: http://periwinklevsorangered.com/map/index.php\nGMP Dubtrack: https://www.dubtrack.fm/join/goodmorningperiwinkle";
+var stringRules = "Chat rules: https://docs.google.com/document/d/1j7I3VLkRWft0oBvhuQGUx0rMu7PXmfTS8k1uPXdallI/edit";
+
+//Functions: Roll
+function roll(ammount, type) {
+	if (type != ""){
+		if(ammount == ""){
+			ammount = 1; //catcher for unspecified dice ammount, default to 1
+		}
+		var total = 0;
+		var result = "";
+		if(ammount != 1) {
+			for (i = 0; i < ammount; i++) {
+				var currentRoll = 0;
+				currentRoll = Math.floor(Math.random() * type) + 1;
+				total = total + currentRoll;
+				if ((ammount-i) != 1){
+					result = result + currentRoll + ", ";
+				}else{
+					result = result + currentRoll;
+				}
+			}
+			return "you rolled " + total + " (" + result + ")";
+		}else{
+		total = Math.floor(Math.random() * type) + 1;
+		return "you rolled " + total;
+		}
+	}else{
+		return "please use \\roll XdY format, where X is number of dice, and Y is number of sides!";
+	}
+}
 
 //Called on message, basically chat commands
 bot.on("message", function(message){
-		//anti lolz
-		// if(message.author.username === "Lolzrfunni"){
-		// bot.reply(message, "fackorrf");
-		// }else{
-
-			//make message content only check the first word
-			var commandsArr = message.content.split(' ');
-			var command = commandsArr[0];
+	//make message content only check the first word
+	var commandsArr = message.content.split(' ');
+	var command = commandsArr[0];
+	
+	switch(command){
+		//info
+		case "\\author":
+		case "\\creator":
+		case "\\info":
+			bot.sendMessage(message.author, stringInfo);
+			break;
 			
-			// anti lolz
-			// if(message.author.username === "Lolzrfunni"){
-				// if(command === "eejitry" || command === "eejitry."){
-					// bot.reply(message, "fackorff");
-				// }
-			// }
+		//help
+		case "\\help":
+			bot.sendMessage(message.author, stringHelp);
+			break;
+		
+		//dice rolling
+		case "\\roll":
+			var dice = message.content.split(' '); //split the command into !roll, and separate xdx for interpretation
+			dice = dice[1]; //now dice is only XdY
+			dice = dice.split('d'); //split by d, so 1d6 becomes dice[1,6]
+			bot.reply(message.author, roll(dice[0],dice[1]));
+			break;
 			
-			switch(command){
-				case "\\author":
-				case "\\creator":
-				case "\\info":
-					bot.sendMessage(message.author, stringInfo);
-					break;
-				case "\\help":
-					bot.sendMessage(message.author, stringHelp);
-					break;
+		//map link
+		case "\\map":
+		case "\\chromamap":
+			bot.sendMessage(message.author, stringMap);
+			break;
+		
+		//troop types cheat sheet
+		case "\\troops":
+		case "\\trooptypes":
+			bot.sendMessage(message.author, stringTroops);
+			break;
+			
+		//no regrets
+		case "\\maggie":
+		case "\\thatcher":
+		case "\\margaret":
+			bot.sendMessage(message.channel, stringMaggie + maggies[Math.floor(Math.random()*maggies.length)]);
+			break;
+		
+		//chromabot commands reference
+		case "\\chromabot":
+		case "\\chromabotcommands":
+		case "\\chromacommands":
+		case "\\battlecommands":
+			bot.sendMessage(message.author, stringCommands);
+			break;
+		
+		//useful chroma-related links
+		case "\\links":
+			bot.sendMessage(message.author, stringLinks);
+			break;
+		
+		//chat rules
+		case "\\rules":
+			bot.sendMessage(message.author, stringRules);
+			break;
+			
+		//facepalm
+		case "\\facepalm":
+			if(commandsArr.length == 1){
+				bot.sendMessage(message.channel, ""+facepalm[Math.floor(Math.random()*facepalm.length)]+"");
+			}else{
+				bot.sendMessage(message.channel, "Damnit, " + commandsArr[1] + "!\n" + facepalm[Math.floor(Math.random()*facepalm.length)]);
 			}
+			break;
+		////
+		//EMOTES
+		////
+		case "\\bazza":
+		case "\\biblethump":
+		case "\\kappa":
+		case "\\frankerz":
+		case "\\kreygasm":
+		case "\\failfish":
+		case "\\this":
+			bot.deleteMessage(message);
+			command = command.substr(1);
+			// bot.sendMessage(message.author, command);
+			bot.sendFile(message.channel, "./"+command+".png", command+".png");
+			break;
 			
-			//version info
-			// if(command === "\\author" || command === "\\creator" || command === "\\info"){
-			// 	bot.sendMessage(message.author, "Bot based on discord.js. Bot creator: /u/szkieletor on reddit.\nSource on GitHub: https://github.com/Szkieletor73/PWvsOR-Chatbot\nContact my creator if you've encountered any problems!");
-			// }
-
-			//help
-			// if(command === "\\help"){
-			// 	bot.sendMessage(message.author, stringHelp);
-			// }
+		case "\\hyper":
+			bot.deleteMessage(message);
+			command = command.substr(1);
+			// bot.sendMessage(message.author, command);
+			bot.sendFile(message.channel, "./"+command+".gif", command+".gif");
+			break;
 			
-			//simple testing message
-			// if(command === "marco"){
-				// bot.reply(message, "Polo!");
-			// }
-			
-			//rolling dice
-			if(command === "\\roll"){
-				var roll = message.content.split(' '); //split the command into !roll, and separate xdx for interpretation
-				//roll.shift(); // removing first word, that is, !roll
-				//roll = roll.join(' '); //rejoin the string without !roll
-				roll = roll[1]; //now roll is only XdY
-				roll = roll.split('d'); //split by d, so 1d6 becomes roll[1,6]
-				var diceAmmount = roll[0]; //diceAmmount is first number of roll array
-				var diceType = roll[1]; //diceType is second number of roll array
-				if (diceType != ""){
-					if(diceAmmount == ""){
-						diceAmmount = 1;
-					}
-					var total = 0;
-					var result = "";
-					if(diceAmmount != 1) {
-						for (i = 0; i < diceAmmount; i++) {
-							var currentRoll = 0;
-							currentRoll = Math.floor(Math.random() * diceType) + 1;
-							total = total + currentRoll;
-							if ((diceAmmount-i) != 1){
-								result = result + currentRoll + ", ";
-							}else{
-								result = result + currentRoll;
-							}
-						}
-						bot.reply(message, "you rolled " + total + "(" + result + ")");
-					}else{
-					total = Math.floor(Math.random() * diceType) + 1;
-					bot.reply(message, " rolled " + total);
-					}
-				}else{
-					bot.reply(message.author, ", please use \\roll XdY format, where X is number of dice, and Y is number of sides!");
-				}
+		case "\\statusmessages":
+			if(statusmessages === true){
+				bot.sendMessage(message.channel, "Presence messages turned OFF by " + message.author);
+				statusmessages = false;
+			}else{
+				bot.sendMessage(message.channel, "Presence messages turned ON by " + message.author);
+				statusmessages = true;
 			}
-			
-			//send a pm with map link
-			if(command === "\\map" || command === "\\chromamap"){
-				bot.sendMessage(message.author, "http://periwinklevsorangered.com/map/index.php");
-			}
-			
-			//troop types!
-			if(command === "\\troops" || command === "\\trooptypes"){
-				bot.sendMessage(message.author, "OPPOSE: Cavalry beats Infantry, Infantry beats Ranged, Ranged beats Cavalry\nSUPPORT: Cavalry for Ranged, Ranged for Infantry, Infantry for Cavalry");
-			}
-			
-			//don't even ask why I did this
-			if(command === "\\maggie" || command === "\\thatcher" || command === "\\margaret"){
-				var rng = Math.floor(Math.random()*maggies.length);
-				bot.sendMessage(message.channel, "INSTANT MAGGIE PROTOCOL ACTIVATED.\nDEPLOYING MAGGIE: " + maggies[rng]);
-			}
-			
-			//chromabot commands
-			if(command === "\\chromabot" || command === "\\chromabotcommands" || command === "\\chromacommands"){
-				bot.sendMessage(message.author, "Full documentation: https://www.reddit.com/r/councilofkarma/wiki/bot_commands\nChromabot's userpage: https://www.reddit.com/user/chromabot\nstatus - gives you a status on your troops\ntime - bot will reply with the time it think it is\nlead - lead your troops\nextract - emergency unstuck command, moves your troops to your capital\nattack / support / oppose - battle commands\ndefect - change your team. Usable only if you haven't taken *any other action* yet.\ncodeword - set up a codeword for your troops, in format \"codeword some word or phrase is troopType\". Supports reddit markdown formatting.\ncodeword status - replies with your set codewords");
-			}
-			
-			//links
-			if(command === "\\links"){
-				bot.sendMessage(message.author, "Chat rules: https://docs.google.com/document/d/1j7I3VLkRWft0oBvhuQGUx0rMu7PXmfTS8k1uPXdallI/edit\nChromabot's userpage: https://www.reddit.com/user/chromabot\nCouncil of Karma: https://www.reddit.com/r/councilofkarma\nPeriwinkle: https://www.reddit.com/r/periwinkle\nOrangered: https://www.reddit.com/r/orangered\nChromanauts: https://www.reddit.com/r/chromanauts\nField of Karmic Glory: https://www.reddit.com/r/FieldOfKarmicGlory\nChromalore: https://www.reddit.com/r/Chromalore\nInteractive map: http://periwinklevsorangered.com/map/index.php\nGMP Dubtrack: https://www.dubtrack.fm/join/goodmorningperiwinkle");
-			}
-			
-			//rules
-			if(command === "\\rules"){
-				bot.sendMessage(message.author, "Chat rules: https://docs.google.com/document/d/1j7I3VLkRWft0oBvhuQGUx0rMu7PXmfTS8k1uPXdallI/edit");
-			}
-			
-			//facepalm
-			if(command === "\\facepalm"){
-				var rng = Math.floor(Math.random()*facepalm.length);
-				if(commandsArr.length == 1){
-					bot.sendMessage(message.channel, ""+facepalm[rng]+"");
-				}else{
-					bot.sendMessage(message.channel, "Damnit, " + commandsArr[1] + "!\n" + facepalm[rng]);
-				}
-			}
-			
-			//bazza
-			if(command === "\\bazza"){
-				bot.deleteMessage(message);
-				bot.sendFile(message.channel, "./bazza.png", "bazza.png");
-			}
-			
-			//biblethump
-			if(command === "\\biblethump"){
-				bot.deleteMessage(message);
-				bot.sendFile(message.channel, "./biblethump.png", "biblethump.png");
-			}
-			
-			//kappa
-			if(command === "\\kappa"){
-				bot.deleteMessage(message);
-				bot.sendFile(message.channel, "./kappa.png", "kappa.png");
-			}
-			
-			//frankerz
-			if(command === "\\frankerz"){
-				bot.deleteMessage(message);
-				bot.sendFile(message.channel, "./frankerz.png", "frankerz.png");
-			}
-			
-			//kreygasm
-			if(command === "\\kreygasm"){
-				bot.deleteMessage(message);
-				bot.sendFile(message.channel, "./kreygasm.png", "kreygasm.png");
-			}
-			
-			//failfish
-			if(command === "\\failfish"){
-				bot.deleteMessage(message);
-				bot.sendFile(message.channel, "./failfish.png", "failfish.png");
-			}
-			
-			//^this
-			if(command === "\\this" || command === "\\^"){
-				bot.deleteMessage(message);
-				bot.sendFile(message.channel, "./uparrow.png", "uparrow.png");
-			}
-			
-			//hyper
-			if(command === "\\hyper"){
-				bot.deleteMessage(message);
-				bot.sendFile(message.channel, "./hyper.gif", "hyper.gif");
-			}
-			
-			//login/logout toggler
-			if(command === "\\statusmessages"){
-				if(statusmessages === true){
-					bot.sendMessage(message.channel, "Presence messages turned OFF by " + message.author);
-					statusmessages = false;
-				}else{
-					bot.sendMessage(message.channel, "Presence messages turned ON by " + message.author);
-					statusmessages = true;
-				}
-			}
-			
-		// } //anti lolz ends here hopefully we never have to deploy it again
+			break;
+	}
 } )
 
 //fired when new person enters the server
@@ -225,25 +183,6 @@ bot.on("serverNewMember", function(user, server){
 //fired on logout/login
 bot.on("presence", function(dataObject){
 	if(statusmessages === true){
-		/*
-		if(dataObject.status === "away"){
-			//add to away array when user goes afk
-			away.push(dataObject.user.username);
-		}
-		
-		if(dataObject.status === "online"){
-			//check if exists in away array
-			if(away.indexOf(dataObject.user.username) == -1){
-				//username doesn't exist in away array, send message
-				away.push(dataObject.user.username); // add username to away array if already online, so it doesn't get called when in-game status changes
-				bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " is now online.*");
-			}else{
-				//username exists in away array, don't send message, remove from array
-				away.splice(away.indexOf(dataObject.user.username),1);
-			}
-		}
-		*/
-		
 		if(dataObject.status === "online" && away.indexOf(dataObject.user.username) == -1){
 			//username doesn't exist in away array, send message
 			away.push(dataObject.user.username); // add username to away array if already online, so it doesn't get called when in-game status changes
@@ -260,4 +199,5 @@ bot.on("presence", function(dataObject){
 	}else{}
 })
 
-bot.login("szkieletorpp@gmail.com", "169806");
+var AuthDetails = require("./auth.json");
+bot.login(AuthDetails.email, AuthDetails.password);
