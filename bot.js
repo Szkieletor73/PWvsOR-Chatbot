@@ -58,13 +58,13 @@ function roll(ammount, type) {
 					result = result + currentRoll;
 				}
 			}
-			return "you rolled " + total + " (" + result + ")";
+			return " rolled " + total + " (" + result + ")";
 		}else{
 		total = Math.floor(Math.random() * type) + 1;
-		return "you rolled " + total;
+		return " rolled " + total;
 		}
 	}else{
-		return "please use \\roll XdY format, where X is number of dice, and Y is number of sides!";
+		return ", please use \\roll XdY format, where X is number of dice, and Y is number of sides!";
 	}
 }
 
@@ -92,7 +92,7 @@ bot.on("message", function(message){
 			var dice = message.content.split(' '); //split the command into !roll, and separate xdx for interpretation
 			dice = dice[1]; //now dice is only XdY
 			dice = dice.split('d'); //split by d, so 1d6 becomes dice[1,6]
-			bot.reply(message.author, roll(dice[0],dice[1]));
+			bot.sendMessage(message.channel, message.author + roll(dice[0],dice[1]));
 			break;
 			
 		//map link
