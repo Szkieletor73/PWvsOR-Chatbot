@@ -18,12 +18,40 @@ var Discord = require("discord.js"); //load discord.js node module
 var bot = new Discord.Client();
 
 //Initialize MAGGIE
-var maggies = ["http://www.hellomagazine.com/imagenes/profiles/margaret-thatcher/6043-margaret-thatcher.jpg","http://www.abc.net.au/news/image/3980674-3x4-700x933.jpg","http://i.telegraph.co.uk/multimedia/archive/02530/Thatcher2_2530641b.jpg","http://www.barbarapijan.com/bpa/Politics/ThatcherMargaret198x.jpg"];
+var maggies = ["http://www.hellomagazine.com/imagenes/profiles/margaret-thatcher/6043-margaret-thatcher.jpg",
+	"http://www.abc.net.au/news/image/3980674-3x4-700x933.jpg",
+	"http://i.telegraph.co.uk/multimedia/archive/02530/Thatcher2_2530641b.jpg",
+	"http://www.barbarapijan.com/bpa/Politics/ThatcherMargaret198x.jpg"];
 var stringMaggie = "INSTANT MAGGIE PROTOCOL ACTIVATED.\nDEPLOYING MAGGIE: ";
 
 //Initialize facepalm
-var facepalm = ["https://teacherorwildlifetrainer.files.wordpress.com/2015/08/double_facepalm.png","https://i.imgur.com/iWKad22.jpg","https://upload.wikimedia.org/wikipedia/commons/3/3b/Paris_Tuileries_Garden_Facepalm_statue.jpg","https://pbs.twimg.com/profile_images/1596470229/facepalm1.jpg"];
+var facepalm = ["https://teacherorwildlifetrainer.files.wordpress.com/2015/08/double_facepalm.png",
+	"https://i.imgur.com/iWKad22.jpg",
+	"https://upload.wikimedia.org/wikipedia/commons/3/3b/Paris_Tuileries_Garden_Facepalm_statue.jpg",
+	"https://pbs.twimg.com/profile_images/1596470229/facepalm1.jpg"];
 
+//Initialize eightball
+var eightball = ["It is certain",
+	"It is decidedly so",
+	"Without a doubt",
+	"Yes, definitely",
+	"You may rely on it",
+	"As I see it, yes",
+	"Most likely",
+	"Outlook good",
+	"Yes",
+	"Signs point to yes",
+	"Reply hazy, try again",
+	"Ask again later",
+	"Better not tell you now",
+	"Cannot predict now",
+	"Concentrate and ask again",
+	"Don't count on it",
+	"My reply is no",
+	"My sources say no",
+	"Outlook not so good",
+	"Very doubtful",];
+	
 //Initialize away array
 var away = [];
 
@@ -88,6 +116,7 @@ bot.on("message", function(message){
 			break;
 		
 		//dice rolling
+		//one more billion dice throw and I swear foggy I'll make a limiter just for you
 		case "\\roll":
 			var dice = message.content.split(' '); //split the command into !roll, and separate xdx for interpretation
 			dice = dice[1]; //now dice is only XdY
@@ -135,11 +164,21 @@ bot.on("message", function(message){
 		//facepalm
 		case "\\facepalm":
 			if(commandsArr.length == 1){
-				bot.sendMessage(message.channel, ""+facepalm[Math.floor(Math.random()*facepalm.length)]+"");
+				bot.sendMessage(message.channel, facepalm[Math.floor(Math.random()*facepalm.length)]);
 			}else{
 				bot.sendMessage(message.channel, "Damnit, " + commandsArr[1] + "!\n" + facepalm[Math.floor(Math.random()*facepalm.length)]);
 			}
 			break;
+			
+		//8ball!
+		case "\\8ball":
+			if(message.author.username == "Lolzrfunni"){
+				bot.sendMessage(message.channel, "fackorff, " + message.author);
+			}else{
+				bot.sendMessage(message.channel, eightball[Math.floor(Math.random()*eightball.length)] + ", " + message.author);
+			}
+			break;
+		
 		////
 		//EMOTES
 		////
