@@ -30,6 +30,10 @@ var away = [];
 //Initialize statusmessages
 var statusmessages = false;
 
+//Initialization of message strings
+var stringInfo = "Bot based on discord.js. Bot creator: /u/szkieletor on reddit.\nSource on GitHub: https://github.com/Szkieletor73/PWvsOR-Chatbot\nContact my creator if you've encountered any problems, and/or make a pull request if you can fix them!";
+var stringHelp = "All commands work in PMs and in channels:\n\\roll XdY - roll X Y-sided dice\n\\chromamap (alias: \\map) - get a link to interactive map\n\\info (aliases: \\creator, \\author) - get contact details of my creator.\n\\troops (alias: \\trooptypes) - get basic troop type flowchart\n\\chromabot (aliases: \\chromabotcommands, \\battlecommands, \\chromacommands) - gives you a list of chromabot commands as well as a direct link to chromabot's /user/page.\n\\links - gives you a list of useful chroma-related links.\n\\rules - gives you chat rules. They're also linked in \\links\nMore to come.";
+
 //Called on message, basically chat commands
 bot.on("message", function(message){
 		//anti lolz
@@ -48,15 +52,26 @@ bot.on("message", function(message){
 				// }
 			// }
 			
-			//version info
-			if(command === "\\author" || command === "\\creator" || command === "\\info"){
-				bot.sendMessage(message.author, "Bot based on discord.js. Bot creator: /u/szkieletor on reddit.\nSource on GitHub: https://github.com/Szkieletor73/PWvsOR-Chatbot\nContact my creator if you've encountered any problems!");
+			switch(command){
+				case "\\author":
+				case "\\creator":
+				case "\\info":
+					bot.sendMessage(message.author, stringInfo);
+					break;
+				case "\\help":
+					bot.sendMessage(message.author, stringHelp);
+					break;
 			}
+			
+			//version info
+			// if(command === "\\author" || command === "\\creator" || command === "\\info"){
+			// 	bot.sendMessage(message.author, "Bot based on discord.js. Bot creator: /u/szkieletor on reddit.\nSource on GitHub: https://github.com/Szkieletor73/PWvsOR-Chatbot\nContact my creator if you've encountered any problems!");
+			// }
 
 			//help
-			if(command === "\\help"){
-				bot.sendMessage(message.author, "All commands work in PMs and in channels:\n\\roll XdY - roll X Y-sided dice\n\\chromamap (alias: \\map) - get a link to interactive map\n\\info (aliases: \\creator, \\author) - get contact details of my creator.\n\\troops (alias: \\trooptypes) - get basic troop type flowchart\n\\chromabot (aliases: \\chromabotcommands, \\battlecommands, \\chromacommands) - gives you a list of chromabot commands as well as a direct link to chromabot's /user/page.\n\\links - gives you a list of useful chroma-related links.\n\\rules - gives you chat rules. They're also linked in \\links\nMore to come.");
-			}
+			// if(command === "\\help"){
+			// 	bot.sendMessage(message.author, stringHelp);
+			// }
 			
 			//simple testing message
 			// if(command === "marco"){
@@ -191,8 +206,10 @@ bot.on("message", function(message){
 			//login/logout toggler
 			if(command === "\\statusmessages"){
 				if(statusmessages === true){
+					bot.sendMessage(message.channel, "Presence messages turned OFF by " + message.author);
 					statusmessages = false;
 				}else{
+					bot.sendMessage(message.channel, "Presence messages turned ON by " + message.author);
 					statusmessages = true;
 				}
 			}
