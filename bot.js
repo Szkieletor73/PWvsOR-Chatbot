@@ -66,10 +66,10 @@ bot.on("message", function(message){
 			//rolling dice
 			if(command === "\\roll"){
 				var roll = message.content.split(' '); //split the command into !roll, and separate xdx for interpretation
-				roll.shift(); // removing first word, that is, !roll
+				//roll.shift(); // removing first word, that is, !roll
 				//roll = roll.join(' '); //rejoin the string without !roll
-				roll = roll[0]; //now roll is only XdY
-				roll = roll.split('d'); //split by d, so 1d6 becomes array(1,6)
+				roll = roll[1]; //now roll is only XdY
+				roll = roll.split('d'); //split by d, so 1d6 becomes roll[1,6]
 				var diceAmmount = roll[0]; //diceAmmount is first number of roll array
 				var diceType = roll[1]; //diceType is second number of roll array
 				if (diceType != ""){
@@ -92,10 +92,10 @@ bot.on("message", function(message){
 						bot.reply(message, "you rolled " + total + "(" + result + ")");
 					}else{
 					total = Math.floor(Math.random() * diceType) + 1;
-					bot.reply(message, "you rolled " + total);
+					bot.reply(message, " rolled " + total);
 					}
 				}else{
-					bot.reply(message, "please use \\roll XdY format, where X is number of dice, and Y is number of sides!");
+					bot.reply(message.author, ", please use \\roll XdY format, where X is number of dice, and Y is number of sides!");
 				}
 			}
 			
