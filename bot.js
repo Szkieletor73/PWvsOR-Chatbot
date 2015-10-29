@@ -189,6 +189,7 @@ bot.on("message", function(message){
 		case "\\kreygasm":
 		case "\\failfish":
 		case "\\this":
+		case "\\nelson":
 			bot.deleteMessage(message);
 			command = command.substr(1);
 			// bot.sendMessage(message.author, command);
@@ -196,6 +197,7 @@ bot.on("message", function(message){
 			break;
 			
 		case "\\hyper":
+		case "\\troy":
 			bot.deleteMessage(message);
 			command = command.substr(1);
 			// bot.sendMessage(message.author, command);
