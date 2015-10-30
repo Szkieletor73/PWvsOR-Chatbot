@@ -191,6 +191,7 @@ bot.on("message", function(message){
 		case "\\failfish":
 		case "\\this":
 		case "\\nelson":
+		case "\\gg":
 			bot.deleteMessage(message);
 			command = command.substr(1);
 			// bot.sendMessage(message.author, command);
