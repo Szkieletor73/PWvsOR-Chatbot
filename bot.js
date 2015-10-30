@@ -55,8 +55,9 @@ var eightball = ["It is certain",
 //Initialize away array
 var away = [];
 
-//Initialize statusmessages
-var statusmessages = false;
+//Initialize status messages
+// var statusmessages = false;
+var statusmessages = [];
 
 //Initialization of message strings
 var stringInfo = "Bot based on discord.js. Bot creator: /u/szkieletor on reddit.\nSource on GitHub: https://github.com/Szkieletor73/PWvsOR-Chatbot\nContact my creator if you've encountered any problems, and/or make a pull request if you can fix them!";
@@ -205,12 +206,20 @@ bot.on("message", function(message){
 			break;
 			
 		case "\\statusmessages":
-			if(statusmessages === true){
-				bot.sendMessage(message.channel, "Presence messages turned OFF by " + message.author);
-				statusmessages = false;
+			// if(statusmessages === true){
+				// bot.sendMessage(message.channel, "Presence messages turned OFF by " + message.author);
+				// statusmessages = false;
+			// }else{
+				// bot.sendMessage(message.channel, "Presence messages turned ON by " + message.author);
+				// statusmessages = true;
+			// }
+			if(statusmessages.indexOf(message.author) == -1){
+				//if user calling doesn't exist in array
+				statusmessages.push(message.author); //put user into the array
+				bot.sendMessage(message.author, "Got it, you will be receiving status messages until the bot restarts!");
 			}else{
-				bot.sendMessage(message.channel, "Presence messages turned ON by " + message.author);
-				statusmessages = true;
+				bot.sendMessage(message.author, "Understood, no more status messages.");
+				statusmessages.splice(statusmessages.indexOf(message.author),1);
 			}
 			break;
 	}
@@ -223,21 +232,19 @@ bot.on("serverNewMember", function(user, server){
 
 //fired on logout/login
 bot.on("presence", function(dataObject){
-	if(statusmessages === true){
-		if(dataObject.status === "online" && away.indexOf(dataObject.user.username) == -1){
-			//username doesn't exist in away array, send message
-			away.push(dataObject.user.username); // add username to away array if already online, so it doesn't get called when in-game status changes
-			bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " is now online.*");
+	if((dataObject.status != "offline" && dataObject.status != "away") && away.indexOf(dataObject.user.username) == -1){
+		//username doesn't exist in away array, send message
+		away.push(dataObject.user.username); // add username to away array if already online, so it doesn't get called when in-game status changes
+		for(var i = 0; i < statusmessages.length; i++){
+			bot.sendMessage(statusmessages[i], "*" + dataObject.user + " is now online.*");
 		}
-		
-		if(dataObject.status === "offline"){
-			// bot.sendMessage(dataObject.server.defaultChannel, "*" + dataObject.user + " went offline.*");
-			//if exists in away array, remove to clear up
-			if(away.indexOf(dataObject.user.username) != -1){
-				away.splice(away.indexOf(dataObject.user.username),1);
-			}
+	}
+	
+	if(dataObject.status === "offline"){
+		if(away.indexOf(dataObject.user.username) != -1){
+			away.splice(away.indexOf(dataObject.user.username),1);
 		}
-	}else{}
+	}
 })
 
 var AuthDetails = require("./auth.json");
