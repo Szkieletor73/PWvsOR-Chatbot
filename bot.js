@@ -192,6 +192,9 @@ bot.on("message", function(message){
 		case "\\this":
 		case "\\nelson":
 		case "\\gg":
+		case "\\damson":
+		case "\\vu":
+		case "\\tottenham":
 			bot.deleteMessage(message);
 			command = command.substr(1);
 			// bot.sendMessage(message.author, command);
@@ -200,6 +203,7 @@ bot.on("message", function(message){
 			
 		case "\\hyper":
 		case "\\troy":
+		case "\\lied":
 			bot.deleteMessage(message);
 			command = command.substr(1);
 			// bot.sendMessage(message.author, command);
