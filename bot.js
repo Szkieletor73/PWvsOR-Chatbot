@@ -195,6 +195,8 @@ bot.on("message", function(message){
 		case "\\damson":
 		case "\\vu":
 		case "\\tottenham":
+		case "\\tfc":
+		case "\\tfc2":
 			bot.deleteMessage(message);
 			command = command.substr(1);
 			// bot.sendMessage(message.author, command);
