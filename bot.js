@@ -208,6 +208,7 @@ bot.on("message", function(message){
 		case "\\hyper":
 		case "\\troy":
 		case "\\lied":
+		case "\\hug":
 			bot.deleteMessage(message);
 			command = command.substr(1);
 			// bot.sendMessage(message.author, command);
