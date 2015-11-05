@@ -4,7 +4,8 @@
   "description": "Periwinkle vs Orangered Discord chatbot",
   "main": "index.js",
   "dependencies": {
-    "discord.js": "^3.8.3"
+    "discord.js": "^3.8.3",
+	"express": "latest"
   },
   "devDependencies": {},
   "scripts": {
