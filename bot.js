@@ -229,6 +229,7 @@ bot.on("message", function(message){
 			case "dansgame":
 			case "pogchamp":
 			case "swiftrage":
+			case "heresy":
 				bot.deleteMessage(message); //delete invoking message for that neat look
 				bot.sendFile(message.channel, "./emotes/"+commandsArr[0]+".png", commandsArr[0]+".png");
 				break;
