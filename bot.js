@@ -233,7 +233,6 @@ bot.on("message", function(message){
 			case "memes":
 			case "orangeturd":
 			case "blueturd":
-			case "lol":
 				bot.deleteMessage(message); //delete invoking message for that neat look
 				bot.sendFile(message.channel, "./emotes/"+commandsArr[0]+".png", commandsArr[0]+".png");
 				break;
@@ -243,6 +242,7 @@ bot.on("message", function(message){
 			case "troy":
 			case "lied":
 			case "hug":
+			case "lol":
 				bot.deleteMessage(message); //delete invoking message for that neat look
 				bot.sendFile(message.channel, "./emotes/"+commandsArr[0]+".gif", commandsArr[0]+".gif");
 				break;
