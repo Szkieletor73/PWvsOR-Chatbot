@@ -256,7 +256,7 @@ bot.on("message", function(message){
 } )
 
 //fired when new person enters the server
-bot.on("serverNewMember", function(user, server){
+bot.on("serverNewMember", function(server, user){
 	//it will also send this thing for any other server I deploy it too, but I'm too lazy to actually check the server so fuck it, no one will notice
 	bot.sendMessage(user, "Welcome to Periwinkle vs Orangered Discord Chat! I'm a resident bot. Type \"\\help\" to get a list of available commands. Type \"\\rules\" to get current chat rules.\nType \"\\info\" to get my creator's contact details and a link to GitHub repo with my code.\nIf you have any questions, ask a moderator!");
 })
