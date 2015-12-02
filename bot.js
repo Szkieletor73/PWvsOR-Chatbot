@@ -51,7 +51,7 @@ var eightball = ["It is certain",
 	"My sources say no",
 	"Outlook not so good",
 	"Very doubtful"];
-	
+
 //Initialize away array
 var away = [];
 
@@ -67,7 +67,7 @@ var stringTroops = "OPPOSE: Cavalry beats Infantry, Infantry beats Ranged, Range
 var stringCommands = "Full documentation: https://www.reddit.com/r/councilofkarma/wiki/bot_commands\nChromabot's userpage: https://www.reddit.com/user/chromabot\nstatus - gives you a status on your troops\ntime - bot will reply with the time it think it is\nlead - lead your troops\nextract - emergency unstuck command, moves your troops to your capital\nattack / support / oppose - battle commands\ndefect - change your team. Usable only if you haven't taken *any other action* yet.\ncodeword - set up a codeword for your troops, in format \"codeword some word or phrase is troopType\". Supports reddit markdown formatting.\ncodeword status - replies with your set codewords";
 var stringLinks = "Chat rules: https://docs.google.com/document/d/1j7I3VLkRWft0oBvhuQGUx0rMu7PXmfTS8k1uPXdallI/edit\nChromabot's userpage: https://www.reddit.com/user/chromabot\nCouncil of Karma: https://www.reddit.com/r/councilofkarma\nPeriwinkle: https://www.reddit.com/r/periwinkle\nOrangered: https://www.reddit.com/r/orangered\nChromanauts: https://www.reddit.com/r/chromanauts\nField of Karmic Glory: https://www.reddit.com/r/FieldOfKarmicGlory\nChromalore: https://www.reddit.com/r/Chromalore\nInteractive map: http://periwinklevsorangered.com/map/index.php\nGMP Dubtrack: https://www.dubtrack.fm/join/goodmorningperiwinkle";
 var stringRules = "Chat rules: https://docs.google.com/document/d/1j7I3VLkRWft0oBvhuQGUx0rMu7PXmfTS8k1uPXdallI/edit";
-var stringEmotes = "Emotes:\n\\bazza\n\\kappa\n\\biblethump\n\\frankerz\n\\kreygasm\n\\failfish\n\\this\n\\nelson\n\\gg\n\\damson\n\\vu\n\\tottenham\n\\tfc\n\\tfc2\n\\sounders\n\\avfc\n\\troy\n\\lied\n\\hyper\n\\hug\n\\everton\n\\evertonfc\n\\potato\n\\hotpm\n\\dansgame\n\\pogchamp\n\\swiftrage\n\\memes\n\\orangeturd\n\\blueturd\n\\lol\n\\comrade\n\\wot\n\\szkieletor\n\\sick\n\\pierdole\n\\glimmerclap\nHave emote requests? Pester /u/szkieletor or make a pull request on GitHub!";
+var stringEmotes = "Emotes:\n\\bazza\n\\kappa\n\\biblethump\n\\frankerz\n\\kreygasm\n\\failfish\n\\this\n\\nelson\n\\gg\n\\damson\n\\vu\n\\tottenham\n\\tfc\n\\tfc2\n\\sounders\n\\avfc\n\\troy\n\\lied\n\\hyper\n\\hug\n\\everton\n\\evertonfc\n\\potato\n\\hotpm\n\\dansgame\n\\pogchamp\n\\swiftrage\n\\memes\n\\orangeturd\n\\blueturd\n\\lol\n\\comrade\n\\wot\n\\szkieletor\n\\sick\n\\pierdole\n\\glimmerclap\n\\skarofleet\nHave emote requests? Pester /u/szkieletor or make a pull request on GitHub!";
 
 //Functions: Roll. For rolling dice. A function made specifically to roll dice. Dice's function.
 function roll(ammount, type) {
@@ -110,12 +110,12 @@ bot.on("message", function(message){
 			case "info":
 				bot.sendMessage(message.author, stringInfo);
 				break;
-				
+
 			//help
 			case "help":
 				bot.sendMessage(message.author, stringHelp);
 				break;
-			
+
 			//dice rolling
 			//one more billion dice throw and I swear foggy I'll make a limiter just for you
 			case "roll":
@@ -124,26 +124,26 @@ bot.on("message", function(message){
 				dice = dice.split('d'); //split by d, so 1d6 becomes dice[1,6]
 				bot.sendMessage(message.channel, message.author + roll(dice[0],dice[1]));
 				break;
-				
+
 			//map link
 			case "map":
 			case "chromamap":
 				bot.sendMessage(message.author, stringMap);
 				break;
-			
+
 			//troop types cheat sheet
 			case "troops":
 			case "trooptypes":
 				bot.sendMessage(message.author, stringTroops);
 				break;
-				
+
 			//no regrets
 			case "maggie":
 			case "thatcher":
 			case "margaret":
 				bot.sendMessage(message.channel, stringMaggie + maggies[Math.floor(Math.random()*maggies.length)]);
 				break;
-			
+
 			//chromabot commands reference
 			case "chromabot":
 			case "chromabotcommands":
@@ -151,18 +151,18 @@ bot.on("message", function(message){
 			case "battlecommands":
 				bot.sendMessage(message.author, stringCommands);
 				break;
-			
+
 			//useful chroma-related links
 			case "links":
 				bot.sendMessage(message.author, stringLinks);
 				break;
-			
+
 			//chat rules
 			//straight from innovations since I can't be bothered to make my own
 			case "rules":
 				bot.sendMessage(message.author, stringRules);
 				break;
-				
+
 			//facepalm
 			case "facepalm":
 				if(commandsArr.length == 1){ //check if commands only consists of one word and continue accordingly
@@ -173,7 +173,7 @@ bot.on("message", function(message){
 					bot.sendMessage(message.channel, "Damnit, " + commandsArr[1] + "!\n" + facepalm[Math.floor(Math.random()*facepalm.length)]);
 				}
 				break;
-				
+
 			//8ball!
 			case "8ball":
 				if(message.author.username == "Lolzrfunni"){ //how mean is too mean?
@@ -183,7 +183,7 @@ bot.on("message", function(message){
 					bot.sendMessage(message.channel, eightball[Math.floor(Math.random()*eightball.length)] + ", " + message.author);
 				}
 				break;
-				
+
 			case "statusmessages":
 				if(statusmessages.indexOf(message.author) == -1){
 					//if user calling doesn't exist in array
@@ -194,12 +194,12 @@ bot.on("message", function(message){
 					statusmessages.splice(statusmessages.indexOf(message.author),1);
 				}
 				break;
-				
+
 			//emotes
 			case "emotes":
 				bot.sendMessage(message.author, stringEmotes);
 				break;
-			
+
 			////
 			//EMOTES
 			////
@@ -238,10 +238,11 @@ bot.on("message", function(message){
 			case "szkieletor":
 			case "sick":
 			case "pierdole":
+      case "skarofleet":
 				bot.deleteMessage(message); //delete invoking message for that neat look
 				bot.sendFile(message.channel, "./emotes/"+commandsArr[0]+".png", commandsArr[0]+".png");
 				break;
-			
+
 			//GIFs
 			case "hyper":
 			case "troy":
@@ -261,7 +262,7 @@ bot.on("message", function(message){
 //fired when new person enters the server
 bot.on("serverNewMember", function(server, user){
 	//it will also send this thing for any other server I deploy it too, but I'm too lazy to actually check the server so fuck it, no one will notice
-	bot.sendMessage(user, "Welcome to Periwinkle vs Orangered Discord Chat! I'm a resident bot. Type \"\\help\" to get a list of available commands. Type \"\\rules\" to get current chat rules.\nType \"\\info\" to get my creator's contact details and a link to GitHub repo with my code.\nIf you have any questions, ask a moderator!");
+	bot.sendMessage(user, "Welcome to Periwinkle vs Orangered Discord Chat, " + user + "! I'm a resident bot. Type \"\\help\" to get a list of available commands. Type \"\\rules\" to get current chat rules.\nType \"\\info\" to get my creator's contact details and a link to GitHub repo with my code.\nIf you have any questions, ask a moderator!");
 })
 
 //fired on logout/login
