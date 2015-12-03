@@ -34,9 +34,3 @@ node_modules/express/node_modules
 
 # Optional REPL history
 .node_repl_history
-node_modules/express/node_modules/accepts/node_modules/mime-types/HISTORY.md
-node_modules/express/node_modules/accepts/node_modules/mime-types/HISTORY.md
-node_modules/express/node_modules/accepts/node_modules/mime-types/node_modules/mime-db/db.json
-node_modules/express/node_modules/accepts/node_modules/mime-types/node_modules/mime-db/HISTORY.md
-node_modules/express/node_modules/accepts/node_modules/mime-types/node_modules/mime-db/package.json
-node_modules/express/node_modules/content-type/package.json
