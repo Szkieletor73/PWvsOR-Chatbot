@@ -30,6 +30,21 @@ var facepalm = ["https://teacherorwildlifetrainer.files.wordpress.com/2015/08/do
 	"https://upload.wikimedia.org/wikipedia/commons/3/3b/Paris_Tuileries_Garden_Facepalm_statue.jpg",
 	"https://pbs.twimg.com/profile_images/1596470229/facepalm1.jpg"];
 
+//Initialize trains
+var stringTrains = "CHOO CHOO\n";
+var trains = ["https://i.imgur.com/5X816B7.jpg",
+            "https://i.imgur.com/KlMahSA.jpg",
+            "https://i.imgur.com/3NI1LgH.jpg",
+            "https://i.imgur.com/R3uSmVM.jpg",
+            "https://i.imgur.com/IgcyraL.jpg",
+            "https://i.imgur.com/4HJmEXq.jpg",
+            "https://i.imgur.com/KRxE3dE.jpg",
+            "https://i.imgur.com/B4pNrmr.jpg",
+            "https://i.imgur.com/hSwIICf.jpg",
+            "https://i.imgur.com/YpFyJtm.jpg",
+            "https://i.imgur.com/nqDnSdx.jpg",
+            "https://i.imgur.com/5ZmCe.jpg"];
+
 //Initialize eightball
 var eightball = ["It is certain",
 	"It is decidedly so",
@@ -142,6 +157,11 @@ bot.on("message", function(message){
 			case "thatcher":
 			case "margaret":
 				bot.sendMessage(message.channel, stringMaggie + maggies[Math.floor(Math.random()*maggies.length)]);
+				break;
+
+            //the trainwiz summoner
+            case "trains":
+				bot.sendMessage(message.channel, stringTrains + trains[Math.floor(Math.random()*trains.length)]);
 				break;
 
 			//chromabot commands reference
