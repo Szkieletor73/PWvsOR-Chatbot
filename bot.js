@@ -43,7 +43,9 @@ var trains = ["https://i.imgur.com/5X816B7.jpg",
             "https://i.imgur.com/hSwIICf.jpg",
             "https://i.imgur.com/YpFyJtm.jpg",
             "https://i.imgur.com/nqDnSdx.jpg",
-            "https://i.imgur.com/5ZmCe.jpg"];
+            "https://i.imgur.com/5ZmCe.jpg",
+            "http://www.traintesting.com/images/IC225_DVT_Leeds.jpg",
+            "https://cdn.discordapp.com/attachments/105035609030029312/124610980985569281/323.jpg"];
 
 //Initialize eightball
 var eightball = ["It is certain",
