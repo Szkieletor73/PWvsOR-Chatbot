@@ -270,6 +270,7 @@ bot.on("message", function(message){
             case "notea":
             case "geoff":
             case "doubt":
+            case "rpck":
 				bot.deleteMessage(message); //delete invoking message for that neat look
 				bot.sendFile(message.channel, "./emotes/"+commandsArr[0]+".png", commandsArr[0]+".png");
 				break;
