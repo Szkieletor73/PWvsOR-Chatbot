@@ -292,11 +292,13 @@ bot.on("message", function(message){
 		}
 	}else{
     	//if message doesn't start with "\", search for /r/ links instead
+/*
         var commandsArr = message.content.split(' '); // split into an array
         for (var i = 0; i < commandsArr.length; i++) {
             if (commandsArr[i] == "/r/")
 
         }
+*/
 	}
 } )
 
