@@ -86,17 +86,24 @@ var stringLinks = "Chat rules: https://docs.google.com/document/d/1j7I3VLkRWft0o
 var stringRules = "Chat rules: https://docs.google.com/document/d/1j7I3VLkRWft0oBvhuQGUx0rMu7PXmfTS8k1uPXdallI/edit";
 var stringEmotes = "Emotes:\n\\bazza\n\\kappa\n\\biblethump\n\\frankerz\n\\kreygasm\n\\failfish\n\\this\n\\nelson\n\\gg\n\\damson\n\\vu\n\\tottenham\n\\tfc\n\\tfc2\n\\sounders\n\\avfc\n\\troy\n\\lied\n\\hyper\n\\hug\n\\everton\n\\evertonfc\n\\potato\n\\hotpm\n\\dansgame\n\\pogchamp\n\\swiftrage\n\\memes\n\\orangeturd\n\\blueturd\n\\lol\n\\comrade\n\\wot\n\\szkieletor\n\\sick\n\\pierdole\n\\glimmerclap\n\\skarofleet\n\\yugoslavia\n\\sans\n\\paf\n\\yugoslavia2\n\\josip\n\\notea\n\\biscuits\n\\geoff\n\\confetti\n\\doubt\n\\rpck\n\\plebtea\n\\papyrus\n\\poplar\n\\purging\nHave emote requests? Pester /u/szkieletor or make a pull request on GitHub!";
 
+//initialize variables
+var total;
+var result;
+var currentRoll;
+var commandsArr;
+var dice;
+
 //Functions: Roll. For rolling dice. A function made specifically to roll dice. Dice's function.
 function roll(ammount, type) {
-	if (type != ""){
+	if ((type != "") && (Number.isInteger(type)) && (Number.isInteger(ammount)) && (type < 10000) && (ammount < 10000)){
 		if(ammount == ""){
 			ammount = 1; //catcher for unspecified dice ammount, default to 1
 		}
-		var total = 0; //initialize total as 0
-		var result = ""; //initialize result as empty string
+		total = 0; //initialize total as 0
+		result = ""; //initialize result as empty string
 		if(ammount != 1) { //if rolling more than one dice, use a different method and output.
 			for (i = 0; i < ammount; i++) { //run the loop the number of times equal to our dice ammount
-				var currentRoll = 0; //initialize current roll result as 0
+				currentRoll = 0; //initialize current roll result as 0
 				currentRoll = Math.floor(Math.random() * type) + 1; //actuall roll
 				total = total + currentRoll; //increase total by current roll
 				if ((ammount-i) != 1){ //this if block will add a comma after all elements except the last one, so it looks nicer
@@ -119,7 +126,7 @@ function roll(ammount, type) {
 bot.on("message", function(message){
 	if(message.content.charAt(0) == "\\"){ //check if the message starts with "\", the command modifier
 		//if message starts with "\", parse the rest
-		var commandsArr = message.content.substring(1).split(' '); //remove first character, "\", and then split into an array
+		commandsArr = message.content.substring(1).split(' '); //remove first character, "\", and then split into an array
 		switch(commandsArr[0]){ //check first element of commandsArr, that is, the first word of a command, and try to match it to any existing commands. No "default", so if no match, nothing will happen
 			//info
 			case "author":
@@ -136,7 +143,7 @@ bot.on("message", function(message){
 			//dice rolling
 			//one more billion dice throw and I swear foggy I'll make a limiter just for you
 			case "roll":
-				var dice = message.content.split(' '); //split the command into !roll, and separate xdx for interpretation
+				dice = message.content.split(' '); //split the command into !roll, and separate xdx for interpretation
 				dice = dice[1]; //now dice is only XdY
 				dice = dice.split('d'); //split by d, so 1d6 becomes dice[1,6]
 				bot.sendMessage(message.channel, message.author + roll(dice[0],dice[1]));
