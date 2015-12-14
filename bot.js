@@ -95,7 +95,7 @@ var dice;
 
 //Functions: Roll. For rolling dice. A function made specifically to roll dice. Dice's function.
 function roll(ammount, type) {
-	if ((type != "") && (Number.isInteger(type)) && (Number.isInteger(ammount)) && (type < 10000) && (ammount < 10000)){
+	if ((type != "") && (type < 10000) && (ammount < 10000)){
 		if(ammount == ""){
 			ammount = 1; //catcher for unspecified dice ammount, default to 1
 		}
@@ -118,7 +118,7 @@ function roll(ammount, type) {
 		return " rolled " + total;
 		}
 	}else{
-		return ", please use \\roll XdY format, where X is number of dice, and Y is number of sides!"; //if the argument format is wrong, return helper.
+		return ", please use \\roll XdY format, where X is number of dice, and Y is number of sides. Maximum allowed value for both X and Y is 9999."; //if the argument format is wrong, return helper.
 	}
 }
 
