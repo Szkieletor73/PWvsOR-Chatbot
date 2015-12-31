@@ -162,16 +162,18 @@ bot.on("message", function(message){
 				break;
 
 			//no regrets
-			case "maggie":
-			case "thatcher":
-			case "margaret":
-				bot.sendMessage(message.channel, stringMaggie + maggies[Math.floor(Math.random()*maggies.length)]);
-				break;
+			//case "maggie":
+			//case "thatcher":
+			//case "margaret":
+			//	bot.sendMessage(message.channel, stringMaggie + maggies[Math.floor(Math.random()*maggies.length)]);
+			//	break;
 
             //the trainwiz summoner
-            case "trains":
-				bot.sendMessage(message.channel, stringTrains + trains[Math.floor(Math.random()*trains.length)]);
-				break;
+            // case "trains":
+			// 	bot.sendMessage(message.channel, stringTrains + trains[Math.floor(Math.random()*trains.length)]);
+			// 	break;
+
+            //disabled, may come back sometime
 
 			//chromabot commands reference
 			case "chromabot":
