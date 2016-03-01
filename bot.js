@@ -84,7 +84,6 @@ var stringTroops = "OPPOSE: Cavalry beats Infantry, Infantry beats Ranged, Range
 var stringCommands = "Full documentation: https://www.reddit.com/r/councilofkarma/wiki/bot_commands\nChromabot's userpage: https://www.reddit.com/user/chromabot\nstatus - gives you a status on your troops\ntime - bot will reply with the time it think it is\nlead - lead your troops\nextract - emergency unstuck command, moves your troops to your capital\nattack / support / oppose - battle commands\ndefect - change your team. Usable only if you haven't taken *any other action* yet.\ncodeword - set up a codeword for your troops, in format \"codeword some word or phrase is troopType\". Supports reddit markdown formatting.\ncodeword status - replies with your set codewords";
 var stringLinks = "Chat rules: https://docs.google.com/document/d/1j7I3VLkRWft0oBvhuQGUx0rMu7PXmfTS8k1uPXdallI/edit\nChromabot's userpage: https://www.reddit.com/user/chromabot\nCouncil of Karma: https://www.reddit.com/r/councilofkarma\nPeriwinkle: https://www.reddit.com/r/periwinkle\nOrangered: https://www.reddit.com/r/orangered\nChromanauts: https://www.reddit.com/r/chromanauts\nField of Karmic Glory: https://www.reddit.com/r/FieldOfKarmicGlory\nChromalore: https://www.reddit.com/r/Chromalore\nInteractive map: http://periwinklevsorangered.com/map/index.php\nGMP Dubtrack: https://www.dubtrack.fm/join/goodmorningperiwinkle";
 var stringRules = "Chat rules: https://docs.google.com/document/d/1j7I3VLkRWft0oBvhuQGUx0rMu7PXmfTS8k1uPXdallI/edit";
-var stringEmotes = "Emotes:\n\\bazza\n\\kappa\n\\biblethump\n\\frankerz\n\\kreygasm\n\\failfish\n\\nelson\n\\gg\n\\damson\n\\vu\n\\tottenham\n\\tfc\n\\tfc2\n\\sounders\n\\avfc\n\\troy\n\\lied\n\\hyper\n\\hug\n\\everton\n\\evertonfc\n\\potato\n\\dansgame\n\\pogchamp\n\\swiftrage\n\\lol\n\\sick\n\\glimmerclap\n\\skarofleet\n\\paf\n\\notea\n\\geoff\n\\confetti\n\\doubt\n\\rpck\n\\purging\n\\shrug\n\\haha\n\\benis\n\\weiss\n\\angel\n\\ok\n\\upset\n\\telepls\n\\dispopcorn\n\\french\nHave emote requests? Pester /u/szkieletor or make a pull request on GitHub!";
 
 //initialize variables
 var total;
@@ -92,6 +91,14 @@ var result;
 var currentRoll;
 var commandsArr;
 var dice;
+
+//Initialize emote list
+var arrayEmotes = ["\\bazza\n","\\kappa\n","\\biblethump\n","\\frankerz\n","\\kreygasm\n""\\failfish\n","\\nelson\n","\\gg\n","\\damson\n","\\vu\n","\\tottenham\n","\\tfc\n","\\tfc2\n","\\sounders\n","\\avfc\n","\\troy\n",
+                  "\\lied\n","\\hyper\n","\\hug\n","\\everton\n","\\evertonfc\n","\\potato\n","\\dansgame\n","\\pogchamp\n","\\swiftrage\n","\\lol\n","\\sick\n","\\glimmerclap\n",
+                  "\\skarofleet\n","\\paf\n","\\notea\n","\\geoff\n","\\confetti\n","\\doubt\n","\\rpck\n","\\purging\n","\\shrug\n","\\haha\n","\\benis\n","\\weiss\n","\\angel\n",
+                  "\\ok\n","\\upset\n","\\telepls\n","\\dispopcorn\n","\\french\n","\\yugoslavia\n","\\uossr\n"];
+var stringEmotes = "Emote list (sorted alphabetically):\n".arrayEmotes.sort()."If you have any requests for emotes, pester /u/Szkieletor or make a pull request on GitHub! Bear in mind all emotes will be voted on in the mod channel prior to implementation and may be rejected.";
+
 
 //Functions: Roll. For rolling dice. A function made specifically to roll dice. Dice's function.
 function roll(ammount, type) {
@@ -162,18 +169,19 @@ bot.on("message", function(message){
 				break;
 
 			//no regrets
-			//case "maggie":
-			//case "thatcher":
-			//case "margaret":
-			//	bot.sendMessage(message.channel, stringMaggie + maggies[Math.floor(Math.random()*maggies.length)]);
-			//	break;
+			case "maggie":
+			case "thatcher":
+			case "margaret":
+				bot.sendMessage(message.channel, stringMaggie + maggies[Math.floor(Math.random()*maggies.length)]);
+				break;
 
-            //the trainwiz summoner
-            // case "trains":
-			// 	bot.sendMessage(message.channel, stringTrains + trains[Math.floor(Math.random()*trains.length)]);
-			// 	break;
+      //the trainwiz summoner
+      case "trains":
+				bot.sendMessage(message.channel, stringTrains + trains[Math.floor(Math.random()*trains.length)]);
+			 	break;
 
-            //disabled, may come back sometime
+      //disabled, may come back sometime
+      //nvm it's back because I feel like it
 
 			//chromabot commands reference
 			case "chromabot":
@@ -269,30 +277,32 @@ bot.on("message", function(message){
 			//case "szkieletor":
 			case "sick":
 			//case "pierdole":
-            case "skarofleet":
-            //case "sans":
-            //case "yugoslavia":
-            case "paf":
-            //case "yugoslavia2":
-            //case "josip":
-            //case "biscuits":
-            case "notea":
-            case "geoff":
-            case "doubt":
-            case "rpck":
-            //case "plebtea":
-            //case "papyrus":
-            //case "poplar":
-            case "haha":
-            case "benis":
-            //case "chicken":
-            case "angel":
-            //case "dogs":
-            //case "vintagemaymay":
-            case "ok":
-            case "telepls":
-            case "dispopcorn":
-            case "french":
+      case "skarofleet":
+      //case "sans":
+      //case "yugoslavia":
+      case "paf":
+      //case "yugoslavia2":
+      //case "josip":
+      //case "biscuits":
+      case "notea":
+      case "geoff":
+      case "doubt":
+      case "rpck":
+      //case "plebtea":
+      //case "papyrus":
+      //case "poplar":
+      case "haha":
+      case "benis":
+      //case "chicken":
+      case "angel":
+      //case "dogs":
+      //case "vintagemaymay":
+      case "ok":
+      case "telepls":
+      case "dispopcorn":
+      case "french":
+      case "uossr":
+      case "yugoslavia":
 				bot.deleteMessage(message); //delete invoking message for that neat look
 				bot.sendFile(message.channel, "./emotes/"+commandsArr[0]+".png", commandsArr[0]+".png");
 				break;
