@@ -23,12 +23,29 @@ var maggies = ["http://www.hellomagazine.com/imagenes/profiles/margaret-thatcher
 	"http://i.telegraph.co.uk/multimedia/archive/02530/Thatcher2_2530641b.jpg",
 	"http://www.barbarapijan.com/bpa/Politics/ThatcherMargaret198x.jpg"];
 var stringMaggie = "INSTANT MAGGIE PROTOCOL ACTIVATED.\nDEPLOYING MAGGIE: ";
+var maggieCounter = 0;
 
 //Initialize facepalm
 var facepalm = ["https://teacherorwildlifetrainer.files.wordpress.com/2015/08/double_facepalm.png",
 	"https://i.imgur.com/iWKad22.jpg",
 	"https://upload.wikimedia.org/wikipedia/commons/3/3b/Paris_Tuileries_Garden_Facepalm_statue.jpg",
 	"https://pbs.twimg.com/profile_images/1596470229/facepalm1.jpg"];
+
+//Initialize eyebleach
+var eyebleach = ["https://i.imgur.com/GleAY3f.jpg", "https://i.imgur.com/dv1QgwX.jpg",
+                "https://i.imgur.com/s4TunGX.jpg",
+                "https://i.imgur.com/thO0kf0.jpg",
+                "https://i.imgur.com/S1OPVB6.jpg",
+                "https://s-media-cache-ak0.pinimg.com/236x/c2/f7/44/c2f7446525943879b7312783e1329343.jpg",
+                "https://upload.wikimedia.org/wikipedia/en/b/be/Red_Panda_in_a_Gingko_tree.jpg",
+                "http://smatterist.com/wp-content/uploads/2014/03/tumblr_n160beu4tc1s8mgkyo10_400.jpg",
+                "http://yourshot.nationalgeographic.com/u/ss/fQYSUbVfts-T7pS2VP2wnKyN8wxywmXtY0-FwsgxpiuVPF2kd2hbXjqLHGJtFDXwZKqYe_cWCCvgaE3P0pg9/",
+                "http://www.photographyblogger.net/wp-content/uploads/2009/05/puppy2.jpg",
+                "http://www.funpedia.net/imgs/sep13/adorable_kittens_02.jpg",
+                "http://images4.fanpop.com/image/photos/18000000/Adorable-kittens-cats-18082611-600-602.jpg",
+                "http://www.furrytalk.com/wp-content/uploads/2011/11/2.jpg",
+                "http://i.imgur.com/MhzrX6p.png"];
+var stringEyebleach = "EYEBLEACH PROTOCOL ACTIVATED. \nDEPLOYING: ";
 
 //Initialize trains
 var stringTrains = "CHOO CHOO\n";
@@ -46,6 +63,7 @@ var trains = ["https://i.imgur.com/5X816B7.jpg",
             "https://i.imgur.com/5ZmCe.jpg",
             "http://www.traintesting.com/images/IC225_DVT_Leeds.jpg",
             "https://cdn.discordapp.com/attachments/105035609030029312/124610980985569281/323.jpg"];
+var trainsCounter = 0;
 
 //Initialize eightball
 var eightball = ["It is certain",
@@ -93,12 +111,11 @@ var commandsArr;
 var dice;
 
 //Initialize emote list
-var arrayEmotes = ["\\bazza\n","\\kappa\n","\\biblethump\n","\\frankerz\n","\\kreygasm\n""\\failfish\n","\\nelson\n","\\gg\n","\\damson\n","\\vu\n","\\tottenham\n","\\tfc\n","\\tfc2\n","\\sounders\n","\\avfc\n","\\troy\n",
-                  "\\lied\n","\\hyper\n","\\hug\n","\\everton\n","\\evertonfc\n","\\potato\n","\\dansgame\n","\\pogchamp\n","\\swiftrage\n","\\lol\n","\\sick\n","\\glimmerclap\n",
-                  "\\skarofleet\n","\\paf\n","\\notea\n","\\geoff\n","\\confetti\n","\\doubt\n","\\rpck\n","\\purging\n","\\shrug\n","\\haha\n","\\benis\n","\\weiss\n","\\angel\n",
-                  "\\ok\n","\\upset\n","\\telepls\n","\\dispopcorn\n","\\french\n","\\yugoslavia\n","\\uossr\n"];
-var stringEmotes = "Emote list (sorted alphabetically):\n".arrayEmotes.sort()."If you have any requests for emotes, pester /u/Szkieletor or make a pull request on GitHub! Bear in mind all emotes will be voted on in the mod channel prior to implementation and may be rejected.";
-
+var arrayEmotes = ["\n\\bazza","\n\\kappa","\n\\biblethump","\n\\frankerz","\n\\kreygasm","\n\\failfish","\n\\nelson","\n\\gg","\n\\damson","\n\\vu","\n\\tottenham","\n\\tfc","\n\\tfc2","\n\\sounders","\n\\avfc",
+                  "\n\\lied","\n\\hyper","\n\\hug","\n\\everton","\n\\evertonfc","\n\\potato","\n\\dansgame","\n\\pogchamp","\n\\swiftrage","\n\\lol","\n\\sick","\n\\glimmerclap","\n\\skarofleet","\n\\paf",
+                  "\n\\notea","\n\\geoff","\n\\confetti","\n\\doubt","\n\\rpck","\n\\purging","\n\\shrug","\n\\haha","\n\\benis","\n\\weiss","\n\\angel","\n\\ok","\n\\upset","\n\\troy",
+                  "\n\\telepls","\n\\dispopcorn","\n\\french","\n\\yugoslavia","\n\\uossr", "\n\\popcorn", "\n\\spurdodance", "\n\\rsl"];
+var stringEmotes = "Emote list (sorted alphabetically):\n"+arrayEmotes.sort()+"\nIf you have any requests for emotes, pester /u/Szkieletor or make a pull request on GitHub! Bear in mind all emotes will be voted on in the mod channel prior to implementation and may be rejected.";
 
 //Functions: Roll. For rolling dice. A function made specifically to roll dice. Dice's function.
 function roll(ammount, type) {
@@ -173,12 +190,23 @@ bot.on("message", function(message){
 			case "thatcher":
 			case "margaret":
 				bot.sendMessage(message.channel, stringMaggie + maggies[Math.floor(Math.random()*maggies.length)]);
+        maggieCounter++;
 				break;
 
       //the trainwiz summoner
       case "trains":
 				bot.sendMessage(message.channel, stringTrains + trains[Math.floor(Math.random()*trains.length)]);
+        trainsCounter++;
 			 	break;
+
+      //yay
+			case "eyebleach":
+				bot.sendMessage(message.channel, stringEyebleach + eyebleach[Math.floor(Math.random()*eyebleach.length)]);
+				break;
+
+      case "counters":
+        bot.sendMessage(message.channel, "Trains: " + trainsCounter + ".\nMaggies: " + maggieCounter + ".");
+        break;
 
       //disabled, may come back sometime
       //nvm it's back because I feel like it
@@ -303,6 +331,7 @@ bot.on("message", function(message){
       case "french":
       case "uossr":
       case "yugoslavia":
+      case "rsl":
 				bot.deleteMessage(message); //delete invoking message for that neat look
 				bot.sendFile(message.channel, "./emotes/"+commandsArr[0]+".png", commandsArr[0]+".png");
 				break;
@@ -314,12 +343,14 @@ bot.on("message", function(message){
 			case "hug":
 			case "lol":
 			case "glimmerclap":
-            case "confetti":
-            case "purging":
-            case "shrug":
-            case "weiss":
-            case "upset":
-            //case "ruby":
+      case "confetti":
+      case "purging":
+      case "shrug":
+      case "weiss":
+      case "upset":
+      case "popcorn":
+      //case "ruby":
+      case "spurdodance":
 				bot.deleteMessage(message); //delete invoking message for that neat look
 				bot.sendFile(message.channel, "./emotes/"+commandsArr[0]+".gif", commandsArr[0]+".gif");
 				break;
