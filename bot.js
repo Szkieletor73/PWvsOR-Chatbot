@@ -219,7 +219,7 @@ function roll(ammount, type) {
         total = 0; //initialize total as 0
         result = ""; //initialize result as empty string
         if (ammount != 1) { //if rolling more than one dice, use a different method and output.
-            for (i = 0; i < ammount; i++) { //run the loop the number of times equal to our dice ammount
+            for (int i = 0; i < ammount; i++) { //run the loop the number of times equal to our dice ammount
                 currentRoll = 0; //initialize current roll result as 0
                 currentRoll = Math.floor(Math.random() * type) + 1; //actuall roll
                 total = total + currentRoll; //increase total by current roll
