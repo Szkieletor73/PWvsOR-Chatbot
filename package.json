@@ -1,14 +1,15 @@
 {
   "name": "discordbot",
-  "version": "0.1.2",
+  "version": "0.3.0",
   "description": "Periwinkle vs Orangered Discord chatbot",
   "main": "index.js",
   "engines": {
-    "node": "latest"
+    "node": "^6.0.0"
   },
   "dependencies": {
-    "discord.js": "latest",
-	  "express": "latest"
+    "body-parser": "latest",
+    "discord.js": "^9.3.0",
+    "express": "latest"
   },
   "devDependencies": {},
   "scripts": {
