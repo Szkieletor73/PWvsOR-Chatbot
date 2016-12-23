@@ -11,5 +11,10 @@ Welcoming message when a new person arrives on the server
 \info (aliases: \author, \creator) - gives creator contact details and a link to GitHub repo
 \rules - gives you a link to chat rules
 \troops (alias: \trooptypes) - troop types cheat sheet
+\emotes - see the alphabetical list of available large emotes
+\eyebleach - when you need to wash your eyes down
 
-All of the commands work in private messages and in any server the bot is deployed to. All commands except \roll currently use private messages as a reply.
+All of the commands work in private messages and in any server the bot is deployed to.
+
+Thanks to Arrem for helping with debugging.
+Thanks to nepeat for pointing out the token issue.
