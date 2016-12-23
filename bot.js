@@ -19,7 +19,8 @@ app.get('/', function(request, response) {
 const Discord = require("discord.js"); //load discord.js node module
 const bot = new Discord.Client();
 //var botClient = new Discord.ClientUser();
-const token = 'MTg1NDU1NDYyNDc1MzY2NDAw.Ck65mg.HLkvCNjES6I-r6uwOinmY01XLUQ';
+const auth = require("./auth.json");
+const token = auth.token;
 
 bot.login(token);
 
@@ -36,7 +37,8 @@ var nowPlaying = [
   "InfinichainZ",
   "TroopDumper Deluxe",
   "FERT",
-  "Chroma's Game Alpha 0.01"
+  "Chroma's Game Alpha 0.01",
+  "Free Bosnia 2016"
 ];
 // END FLUFF
 
@@ -219,7 +221,7 @@ function roll(ammount, type) {
         total = 0; //initialize total as 0
         result = ""; //initialize result as empty string
         if (ammount != 1) { //if rolling more than one dice, use a different method and output.
-            for (int i = 0; i < ammount; i++) { //run the loop the number of times equal to our dice ammount
+            for (var i = 0; i < ammount; i++) { //run the loop the number of times equal to our dice ammount
                 currentRoll = 0; //initialize current roll result as 0
                 currentRoll = Math.floor(Math.random() * type) + 1; //actuall roll
                 total = total + currentRoll; //increase total by current roll
@@ -229,10 +231,10 @@ function roll(ammount, type) {
                     result = result + currentRoll; //ditto, but without a comma because it's the last element and "(1, 1, )" looks bad
                 }
             }
-            return "Rolled " + total + " (" + result + ")"; //output in format "@username rolled total (each dice roll separately)"
+            return " rolled " + total + " (" + result + ")"; //output in format "@username rolled total (each dice roll separately)"
         } else {
             total = Math.floor(Math.random() * type) + 1; //since we're only rolling one dice, we don't need currentRoll and we're inputting straight into total
-            return "Rolled " + total;
+            return " rolled " + total;
         }
     } else {
         return ", please use \\roll XdY format, where X is number of dice, and Y is number of sides. Maximum allowed value for both X and Y is 9999."; //if the argument format is wrong, return helper.
@@ -262,7 +264,7 @@ bot.on("message", message => {
                 dice = message.content.split(' '); //split the command into !roll, and separate xdx for interpretation
                 dice = dice[1]; //now dice is only XdY
                 dice = dice.split('d'); //split by d, so 1d6 becomes dice[1,6]
-                message.channel.sendMessage(roll(dice[0], dice[1]));
+                message.channel.sendMessage(message.author + roll(dice[0], dice[1]));
                 break;
 
                 //map link
